@@ -3,8 +3,6 @@
   "buildCommand": "cd frontend && npm run build",
   "installCommand": "npm install",
   "env": {
-    "NEXT_PUBLIC_API_URL": {
-      "description": "Backend API URL"
-    }
+    "NEXT_PUBLIC_API_URL": "http://localhost:5001"
   }
 }
