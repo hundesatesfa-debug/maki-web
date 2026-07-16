@@ -1,0 +1,243 @@
+================================================================================
+                        MAKI - QUICK REFERENCE
+================================================================================
+
+🎯 WHAT IS THIS?
+  MAKI is a 3-language property rental platform with interactive maps.
+  Brand: Modern, professional, artistic gradient logo.
+  Location: C:\Users\odaa\Desktop\MAKI WEB\
+
+================================================================================
+                        🚀 HOW TO USE NOW
+================================================================================
+
+1. ALREADY RUNNING:
+   Frontend: http://localhost:3000 (or http://192.168.56.1:3000)
+   Backend: http://localhost:5001
+
+2. FEATURES AVAILABLE:
+   ✅ 3 Languages (English, Afan Oromo, Amharic)
+   ✅ Login/Register (Secure auth)
+   ✅ Interactive maps showing properties
+   ✅ Role-based access (Admin, Owner, Renter)
+   ✅ Professional UI/UX
+
+3. TEST CREDENTIALS:
+   Email: owner1@example.com
+   Password: Password123!
+
+================================================================================
+                        📚 DOCUMENTATION
+================================================================================
+
+Start with these files (in order):
+
+1. READY_TO_SHARE.md
+   → Quick start guide
+   → How to share with others on same network
+   → Testing checklist
+
+2. DEPLOYMENT_GUIDE.md
+   → How to deploy to internet (Vercel, Railway, etc.)
+   → Make it accessible from anywhere
+   → Production setup
+
+3. MAKI_COMPLETE_STATUS.md
+   → Full feature list
+   → Technical stack
+   → All details
+
+================================================================================
+                        🌐 SHARING OPTIONS
+================================================================================
+
+OPTION 1: Local Network (NOW - No setup needed!)
+   Share this URL with people on your WiFi:
+   http://192.168.56.1:3000
+
+OPTION 2: Internet Anywhere (5 min setup)
+   Follow DEPLOYMENT_GUIDE.md to deploy to:
+   - Frontend: Vercel (free, easy)
+   - Backend: Railway (free, easy)
+   Then share: https://maki-frontend.vercel.app
+
+================================================================================
+                        🎨 WHAT'S NEW
+================================================================================
+
+✅ Brand Changed to "MAKI" (artistic gradient logo)
+✅ 3 Languages Supported (English, Afan Oromo, Amharic)
+✅ Language Switcher in Header (Globe icon)
+✅ Interactive Map with Leaflet
+✅ Multi-language Map Popups
+✅ Professional Authentication
+✅ Role-Based Dashboards
+✅ Responsive Design
+
+================================================================================
+                        💻 RUNNING SERVICES
+================================================================================
+
+Backend (Node.js Express):
+  Location: backend/ folder
+  Command: npm run dev
+  Port: 5001
+  API: http://localhost:5001/api/v1
+
+Frontend (Next.js):
+  Location: frontend/ folder
+  Command: npm run dev
+  Port: 3000
+  URL: http://localhost:3000
+
+Database:
+  Type: SQLite (local)
+  Location: backend/prisma/dev.db
+  Sample data included (5 users, 5 listings)
+
+================================================================================
+                        🔐 TEST ACCOUNTS
+================================================================================
+
+All passwords: Password123!
+
+ADMIN:
+  Email: admin@houserentethiopia.com
+  After login → Goes to /dashboard
+
+OWNER:
+  Email: owner1@example.com
+  After login → Goes to /my-listings
+
+RENTER:
+  Email: renter1@example.com
+  After login → Goes to /listings
+
+Or create a new account by clicking Register!
+
+================================================================================
+                        🗺️ MAP FEATURES
+================================================================================
+
+On the "Browse" page, you'll see:
+
+1. Interactive Map
+   - Shows all properties with markers
+   - Click a marker to see property details
+   - Zoom and pan the map
+   - Centered on Addis Ababa
+
+2. All Properties Grid
+   - Below the map
+   - Click to view details
+   - Responsive on mobile
+
+================================================================================
+                        🌍 LANGUAGE SWITCHING
+================================================================================
+
+How to switch languages:
+
+1. Look for GLOBE ICON in top-right corner
+2. Click the globe icon
+3. Select your language:
+   - 🇬🇧 English
+   - 🇪🇹 Afan Oromo
+   - 🇪🇹 Amharic
+4. All content changes instantly!
+5. Your choice is saved (even after refresh)
+
+================================================================================
+                        📋 QUICK COMMANDS
+================================================================================
+
+# Start backend
+cd backend
+npm run dev
+
+# Start frontend (in new terminal)
+cd frontend
+npm run dev
+
+# View database GUI
+cd backend
+npm run prisma:studio
+
+# Reset database with sample data
+cd backend
+npm run prisma:seed
+
+# Build for production
+cd backend && npm run build
+cd frontend && npm run build
+
+================================================================================
+                        🚀 DEPLOYMENT (5 MIN)
+================================================================================
+
+Want to make it accessible from anywhere (internet)?
+
+1. Read: DEPLOYMENT_GUIDE.md
+2. Choose option (recommended: Vercel + Railway)
+3. Follow steps (~15 minutes)
+4. Share public URL
+
+Cost: FREE (good free tier on both platforms)
+
+================================================================================
+                        ✅ VERIFICATION
+================================================================================
+
+Everything should be working:
+
+✅ Can access http://localhost:3000
+✅ Language switcher works (top-right)
+✅ Can login with test credentials
+✅ Map shows on Browse page
+✅ Profile appears in header after login
+✅ Can logout
+✅ All 3 languages are functional
+
+If any issues:
+- Restart both services
+- Clear browser cache
+- Check terminal for errors
+
+================================================================================
+                        📞 NEED HELP?
+================================================================================
+
+1. Local Issues?
+   - Check terminal logs
+   - Restart services
+   - Clear browser cache
+
+2. Deployment Help?
+   - Read DEPLOYMENT_GUIDE.md
+   - Visit Vercel.com or Railway.app
+   - Their docs are very helpful
+
+3. Translation Errors?
+   - Check frontend/src/lib/translations.ts
+   - Fix translations there
+   - Frontend auto-refreshes
+
+================================================================================
+                        🎉 YOU'RE ALL SET!
+================================================================================
+
+MAKI is ready to use locally or deploy globally.
+
+NEXT STEPS:
+1. Access: http://localhost:3000
+2. Test features
+3. Share with others (see READY_TO_SHARE.md)
+4. Deploy when ready (see DEPLOYMENT_GUIDE.md)
+
+Questions? Check the markdown files - they have all the details!
+
+================================================================================
+Status: ✅ LIVE & READY
+Created: June 26-29, 2026
+Version: 1.0.0 MAKI
+================================================================================

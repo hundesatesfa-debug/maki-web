@@ -28,6 +28,7 @@ export interface Listing {
     id: string;
     firstName: string;
     lastName: string;
+    phone?: string | null;
     profilePicture: string | null;
   };
   isFavorited?: boolean;

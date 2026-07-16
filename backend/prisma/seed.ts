@@ -1,4 +1,4 @@
-import { PrismaClient, Role, HouseType, ListingStatus } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -28,7 +28,7 @@ async function main() {
       firstName: 'Admin',
       lastName: 'User',
       phone: '+251911000000',
-      role: Role.ADMIN,
+      role: 'ADMIN',
     },
   });
   console.log(`✅ Admin created: ${admin.email}`);
@@ -41,7 +41,7 @@ async function main() {
       firstName: 'Abebe',
       lastName: 'Kebede',
       phone: '+251911111111',
-      role: Role.OWNER,
+      role: 'OWNER',
     },
   });
 
@@ -52,7 +52,7 @@ async function main() {
       firstName: 'Tigist',
       lastName: 'Haile',
       phone: '+251922222222',
-      role: Role.OWNER,
+      role: 'OWNER',
     },
   });
   console.log(`✅ Owners created: ${owner1.email}, ${owner2.email}`);
@@ -65,7 +65,7 @@ async function main() {
       firstName: 'Dawit',
       lastName: 'Tadesse',
       phone: '+251933333333',
-      role: Role.RENTER,
+      role: 'RENTER',
     },
   });
 
@@ -76,7 +76,7 @@ async function main() {
       firstName: 'Sara',
       lastName: 'Mekonnen',
       phone: '+251944444444',
-      role: Role.RENTER,
+      role: 'RENTER',
     },
   });
   console.log(`✅ Renters created: ${renter1.email}, ${renter2.email}`);
@@ -94,8 +94,8 @@ async function main() {
       longitude: 38.7636,
       bedrooms: 3,
       bathrooms: 2,
-      houseType: HouseType.APARTMENT,
-      status: ListingStatus.AVAILABLE,
+      houseType: 'APARTMENT',
+      status: 'AVAILABLE',
       isPremium: true,
     },
   });
@@ -112,8 +112,8 @@ async function main() {
       longitude: 38.7613,
       bedrooms: 1,
       bathrooms: 1,
-      houseType: HouseType.STUDIO,
-      status: ListingStatus.AVAILABLE,
+      houseType: 'STUDIO',
+      status: 'AVAILABLE',
     },
   });
 
@@ -130,8 +130,8 @@ async function main() {
       longitude: 38.8353,
       bedrooms: 4,
       bathrooms: 3,
-      houseType: HouseType.VILLA,
-      status: ListingStatus.AVAILABLE,
+      houseType: 'VILLA',
+      status: 'AVAILABLE',
       isPremium: true,
     },
   });
@@ -148,8 +148,8 @@ async function main() {
       longitude: 38.7578,
       bedrooms: 2,
       bathrooms: 2,
-      houseType: HouseType.CONDO,
-      status: ListingStatus.AVAILABLE,
+      houseType: 'CONDO',
+      status: 'AVAILABLE',
     },
   });
 
@@ -165,8 +165,8 @@ async function main() {
       longitude: 38.4763,
       bedrooms: 3,
       bathrooms: 2,
-      houseType: HouseType.HOUSE,
-      status: ListingStatus.AVAILABLE,
+      houseType: 'HOUSE',
+      status: 'AVAILABLE',
     },
   });
 

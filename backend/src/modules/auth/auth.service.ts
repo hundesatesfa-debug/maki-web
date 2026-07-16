@@ -28,9 +28,8 @@ export class AuthService {
       },
     });
 
-    const payload = { userId: user.id, role: user.role };
-    const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
+    const accessToken = generateAccessToken(user.id, user.email, user.role);
+    const refreshToken = generateRefreshToken(user.id);
 
     await prisma.user.update({
       where: { id: user.id },
@@ -61,9 +60,8 @@ export class AuthService {
       throw ApiError.unauthorized('Invalid email or password');
     }
 
-    const payload = { userId: user.id, role: user.role };
-    const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
+    const accessToken = generateAccessToken(user.id, user.email, user.role);
+    const refreshToken = generateRefreshToken(user.id);
 
     await prisma.user.update({
       where: { id: user.id },
@@ -93,9 +91,8 @@ export class AuthService {
       throw ApiError.unauthorized('Invalid refresh token');
     }
 
-    const payload = { userId: user.id, role: user.role };
-    const newAccessToken = generateAccessToken(payload);
-    const newRefreshToken = generateRefreshToken(payload);
+    const newAccessToken = generateAccessToken(user.id, user.email, user.role);
+    const newRefreshToken = generateRefreshToken(user.id);
 
     await prisma.user.update({
       where: { id: user.id },

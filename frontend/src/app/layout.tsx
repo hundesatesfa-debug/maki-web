@@ -1,19 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter, Geist } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
 
 export const metadata: Metadata = {
   title: {
-    default: 'House Rent Ethiopia — Find Your Perfect Home',
+    default: 'House Rent Ethiopia - Find Your Perfect Home',
     template: '%s | House Rent Ethiopia',
   },
   description:
@@ -34,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en">
       <body className="min-h-screen bg-background font-sans antialiased">
         <Providers>{children}</Providers>
       </body>

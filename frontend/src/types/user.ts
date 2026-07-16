@@ -1,3 +1,5 @@
+export type Role = 'ADMIN' | 'OWNER' | 'RENTER';
+
 export interface User {
   id: string;
   email: string;
@@ -5,7 +7,7 @@ export interface User {
   lastName: string;
   phone: string | null;
   profilePicture: string | null;
-  role: 'ADMIN' | 'OWNER' | 'RENTER';
+  role: Role;
   isBanned: boolean;
   createdAt: string;
   updatedAt: string;
@@ -22,7 +24,7 @@ export interface RegisterRequest {
   firstName: string;
   lastName: string;
   phone?: string;
-  role: 'OWNER' | 'RENTER';
+  role: Extract<Role, 'OWNER' | 'RENTER'>;
 }
 
 export interface AuthResponse {

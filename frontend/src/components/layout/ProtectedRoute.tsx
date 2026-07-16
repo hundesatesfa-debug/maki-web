@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { ROUTES } from '@/constants/routes';
-import { Role } from '@prisma/client';
+import type { Role } from '@/types/user';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -29,7 +29,7 @@ export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) 
       return;
     }
 
-    if (allowedRoles && user && !allowedRoles.includes(user.role as Role)) {
+    if (allowedRoles && user && !allowedRoles.includes(user.role)) {
       router.replace(ROUTES.HOME);
     }
   }, [isAuthenticated, user, isLoading, allowedRoles, router, pathname, mounted]);
@@ -46,7 +46,7 @@ export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) 
     return null; // Will redirect in useEffect
   }
 
-  if (allowedRoles && user && !allowedRoles.includes(user.role as Role)) {
+  if (allowedRoles && user && !allowedRoles.includes(user.role)) {
     return null; // Will redirect in useEffect
   }
 

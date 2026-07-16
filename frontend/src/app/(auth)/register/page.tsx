@@ -67,8 +67,10 @@ export default function RegisterPage() {
     <>
       <div className="mb-8 text-center lg:text-left">
         <Link href={ROUTES.HOME} className="flex items-center justify-center lg:justify-start gap-2 text-primary font-bold text-2xl mb-8">
-          <Home className="w-8 h-8" />
-          <span>House Rent Ethiopia</span>
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-700 text-white font-bold text-xl shadow-lg">
+            M
+          </div>
+          <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent font-black tracking-tight">MAKI</span>
         </Link>
         <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create an account</h2>
         <p className="mt-2 text-sm text-gray-600">
