@@ -1,12 +1,10 @@
 {
   "version": 2,
-  "name": "maki-web",
   "buildCommand": "cd frontend && npm run build",
   "installCommand": "npm install",
-  "public": false,
   "env": {
     "NEXT_PUBLIC_API_URL": {
-      "description": "Backend API URL - e.g., https://your-backend.railway.app"
+      "description": "Backend API URL"
     }
   }
 }
