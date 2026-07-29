@@ -37,7 +37,9 @@ export default function Map({ position, onPositionSelect }: MapProps) {
 
   useEffect(() => {
     // This is needed to ensure leaflet's CSS gets properly applied in some edge cases
-    window.dispatchEvent(new Event('resize'));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('resize'));
+    }
   }, []);
 
   return (
