@@ -42,8 +42,8 @@ export default function NewListingPage() {
     if (files) {
       Array.from(files).forEach(file => {
         const reader = new FileReader();
-        reader.onload = (event) => {
-          const result = event.currentTarget?.result;
+        reader.onload = (event: ProgressEvent<FileReader>) => {
+          const result = event.target?.result;
           if (result && typeof result === 'string') {
             setImages(prev => [...prev, result]);
           }
