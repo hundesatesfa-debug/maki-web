@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Disable turbopack to avoid build issues on Vercel */
+  experimental: {
+    turbo: false,
+  },
+  /* Other config options */
 };
 
 export default nextConfig;
