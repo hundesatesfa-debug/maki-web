@@ -38,13 +38,14 @@ export default function NewListingPage() {
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const files = e.currentTarget.files;
     if (files) {
       Array.from(files).forEach(file => {
         const reader = new FileReader();
         reader.onload = (event) => {
-          if (event.target?.result) {
-            setImages(prev => [...prev, event.target.result as string]);
+          const result = event.currentTarget?.result;
+          if (result && typeof result === 'string') {
+            setImages(prev => [...prev, result]);
           }
         };
         reader.readAsDataURL(file);
