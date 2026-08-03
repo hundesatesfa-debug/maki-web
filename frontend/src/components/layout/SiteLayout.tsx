@@ -22,6 +22,7 @@ import { useAuthStore } from '@/store/authStore';
 import { useLogout } from '@/hooks/useAuth';
 import { useLanguageStore } from '@/hooks/useLanguage';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { NotificationBell } from '@/components/notifications/NotificationBell';
 import { useState } from 'react';
 
 export function Header() {
@@ -75,6 +76,8 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher currentLanguage={language} onLanguageChange={setLanguage} />
+          
+          {isAuthenticated && user && <NotificationBell unreadCount={0} />}
           
           {isAuthenticated && user ? (
             <div className="relative">
