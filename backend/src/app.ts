@@ -9,6 +9,11 @@ import { env } from './config/env';
 import authRoutes from './modules/auth/auth.routes';
 import listingRoutes from './modules/listings/listing.routes';
 import messageRoutes from './modules/messages/message.routes';
+import paymentRoutes from './modules/payments/payment.routes';
+import bookingRoutes from './modules/bookings/booking.routes';
+import reviewRoutes from './modules/reviews/review.routes';
+import notificationRoutes from './modules/notifications/notification.routes';
+import adminRoutes from './modules/admin/admin.routes';
 import { ApiError } from './utils/apiError';
 import { sendError } from './utils/apiResponse';
 
@@ -39,10 +44,15 @@ app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Routes
+// API Routes (v1)
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/listings', listingRoutes);
 app.use('/api/v1/messages', messageRoutes);
+app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/bookings', bookingRoutes);
+app.use('/api/v1/reviews', reviewRoutes);
+app.use('/api/v1/notifications', notificationRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 // 404 handler
 app.use((_req, res) => {

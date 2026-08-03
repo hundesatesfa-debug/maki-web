@@ -1,22 +1,45 @@
 export const ROUTES = {
-  HOME: '/',
+  // Auth
   LOGIN: '/login',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
+
+  // Main
+  HOME: '/',
   LISTINGS: '/listings',
   LISTING_DETAIL: (id: string) => `/listings/${id}`,
-  FAVORITES: '/favorites',
-  CHAT: '/chat',
-  CHAT_ROOM: (id: string) => `/chat/${id}`,
-  NOTIFICATIONS: '/notifications',
+
+  // User
   PROFILE: '/profile',
   MY_LISTINGS: '/my-listings',
-  NEW_LISTING: '/my-listings/new',
+  CREATE_LISTING: '/my-listings/new',
   EDIT_LISTING: (id: string) => `/my-listings/${id}/edit`,
-  PREMIUM: '/premium',
-  ADMIN_DASHBOARD: '/dashboard',
-  ADMIN_USERS: '/dashboard/users',
-  ADMIN_LISTINGS: '/dashboard/listings',
-  ADMIN_PREMIUM: '/dashboard/premium',
+
+  // Bookings
+  BOOKINGS: '/bookings',
+  BOOKING_DETAIL: (id: string) => `/bookings/${id}`,
+
+  // Payments
+  PAYMENTS: '/payments',
+  CHECKOUT: '/checkout',
+
+  // Messages
+  CHAT: '/chat',
+  MESSAGES: '/messages',
+
+  // Favorites
+  FAVORITES: '/favorites',
+
+  // Notifications
+  NOTIFICATIONS: '/notifications',
+
+  // Admin
+  ADMIN_DASHBOARD: '/admin/dashboard',
+  ADMIN_USERS: '/admin/users',
+  ADMIN_LISTINGS: '/admin/listings',
+  ADMIN_DISPUTES: '/admin/disputes',
+  ADMIN_KYC: '/admin/kyc',
+  ADMIN_TRANSACTIONS: '/admin/transactions',
+  ADMIN_REPORTS: '/admin/reports',
 } as const;
