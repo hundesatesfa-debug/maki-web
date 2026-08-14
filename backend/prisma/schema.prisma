@@ -47,6 +47,8 @@ model User {
   disputesAsFileuer        Dispute[] @relation("DisputeFiler")
   disputesAsResolver       Dispute[] @relation("DisputeResolver")
   transactionsRecords      Transaction[]
+  invoicesAsTenant         Invoice[] @relation("InvoiceTenant")
+  invoicesAsLandlord       Invoice[] @relation("InvoiceLandlord")
 
   @@map("users")
 }
@@ -59,7 +61,7 @@ model Listing {
   price               Float
   address             String
   city                String
-  imageUrls           Json          @default("[]")
+  imageUrls           String        @default("[]") // JSON array stored as text
   latitude            Float
   longitude           Float
   bedrooms            Int
@@ -83,7 +85,6 @@ model Listing {
   conversations       Conversation[]
   premiumListing      PremiumListing?
   bookings            Booking[]
-  reviews             Review[]
   invoices            Invoice[]
 
   // Indexes
@@ -170,23 +171,6 @@ model Message {
 
   @@index([conversationId, createdAt])
   @@map("messages")
-}
-
-model Notification {
-  id        String           @id @default(uuid())
-  userId    String           @map("user_id")
-  type      String   // NEW_MESSAGE, LISTING_UPDATE, PREMIUM_EXPIRY
-  title     String
-  content   String?
-  link      String?
-  isRead    Boolean          @default(false) @map("is_read")
-  createdAt DateTime         @default(now()) @map("created_at")
-
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId, isRead, createdAt])
-  @@map("notifications")
 }
 
 model PremiumListing {
@@ -398,7 +382,7 @@ model Dispute {
   // Relations
   booking         Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
   filer           User      @relation("DisputeFiler", fields: [filedBy], references: [id], onDelete: Restrict)
-  resolver        User?     @relation("DisputeResolver", fields: [resolvedBy], references: [id], onDelete: Set Null)
+  resolver        User?     @relation("DisputeResolver", fields: [resolvedBy], references: [id], onDelete: SetNull)
 
   @@index([bookingId])
   @@index([status])
@@ -456,8 +440,8 @@ model Invoice {
 
   // Relations
   payment         Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade)
-  tenant          User      @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-  landlord        User      @relation(fields: [landlordId], references: [id], onDelete: Restrict)
+  tenant          User      @relation("InvoiceTenant", fields: [tenantId], references: [id], onDelete: Restrict)
+  landlord        User      @relation("InvoiceLandlord", fields: [landlordId], references: [id], onDelete: Restrict)
   property        Listing   @relation(fields: [propertyId], references: [id], onDelete: Restrict)
 
   @@map("invoices")

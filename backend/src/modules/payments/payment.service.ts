@@ -50,7 +50,13 @@ export class PaymentService {
     paymentType: string;
     idempotencyKey?: string;
     userId: string;
-  }) {
+  }): Promise<{
+    success: boolean;
+    payment: any;
+    isIdempotent?: boolean;
+    message?: string;
+    paymentResult?: PaymentResult;
+  }> {
     try {
       // Validate booking exists
       const booking = await prisma.booking.findUnique({

@@ -11,7 +11,7 @@ export default function AdminDisputesPage() {
     refundAmount: number
   ) => {
     try {
-      await api.admin.resolveDispute(disputeId, {
+      await api.admin.resolveDispute?.(disputeId, {
         decision,
         refundAmount,
         notes: 'Dispute resolved',

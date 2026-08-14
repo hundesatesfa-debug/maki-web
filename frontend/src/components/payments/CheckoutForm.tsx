@@ -38,7 +38,7 @@ export function CheckoutForm({
     try {
       const result = await onSubmit(selectedMethod, amount);
 
-      if (result.redirectUrl) {
+      if (result?.redirectUrl) {
         // Redirect to payment gateway
         window.location.href = result.redirectUrl;
       } else {

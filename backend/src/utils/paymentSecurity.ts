@@ -118,8 +118,8 @@ export class PaymentSecurity {
     userId?: string;
     bookingId?: string;
     gatewayName: string;
-    amount: number;
-    currency: string;
+    amount?: number;
+    currency?: string;
     status: string;
     action: string;
     errorMessage?: string;
@@ -129,8 +129,8 @@ export class PaymentSecurity {
       userId: data.userId,
       bookingId: data.bookingId,
       gatewayName: data.gatewayName,
-      amount: data.amount,
-      currency: data.currency,
+      amount: data.amount ?? null,
+      currency: data.currency ?? null,
       status: data.status,
       action: data.action,
       errorMessage: data.errorMessage || null,

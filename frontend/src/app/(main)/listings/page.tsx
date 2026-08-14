@@ -89,11 +89,6 @@ function ListingsContent() {
     router.push('');
   };
 
-  const handleClearFilter = () => {
-    setSelectedCity('');
-    router.push('');
-  };
-
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-8">

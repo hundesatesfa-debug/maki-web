@@ -26,7 +26,7 @@ export default function PaymentsPage() {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await api.payments.list({ status: filter === 'all' ? undefined : filter.toUpperCase() });
+        const response = await api.payments.getAll({ status: filter === 'all' ? undefined : filter.toUpperCase() });
         setPayments(response.data.data.items || []);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch payments');
@@ -40,15 +40,16 @@ export default function PaymentsPage() {
 
   const handleDownloadInvoice = async (invoiceId: string) => {
     try {
-      const response = await api.payments.downloadInvoice(invoiceId);
-      // Handle file download
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `invoice-${invoiceId}.pdf`);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode?.removeChild(link);
+      const response = await api.payments.downloadInvoice?.(invoiceId);
+      if (response) {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `invoice-${invoiceId}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode?.removeChild(link);
+      }
     } catch (err) {
       console.error('Failed to download invoice:', err);
     }

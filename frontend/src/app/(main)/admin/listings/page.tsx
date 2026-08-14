@@ -7,7 +7,7 @@ import { api } from '@/lib/api';
 export default function AdminListingsPage() {
   const handleApproveListing = async (listingId: string) => {
     try {
-      await api.admin.approveListing(listingId);
+      await api.admin.approveListing?.({ listingId });
       // Refresh or show success
     } catch (err) {
       console.error('Failed to approve listing:', err);
@@ -16,7 +16,7 @@ export default function AdminListingsPage() {
 
   const handleRejectListing = async (listingId: string, reason: string) => {
     try {
-      await api.admin.rejectListing(listingId, { reason });
+      await api.admin.rejectListing?.({ listingId, reason });
       // Refresh or show success
     } catch (err) {
       console.error('Failed to reject listing:', err);

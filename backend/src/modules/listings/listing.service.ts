@@ -62,7 +62,17 @@ export const ListingService = {
     const listing = await prisma.listing.create({
       data: {
         ownerId,
-        ...data,
+        title: data.title,
+        description: data.description,
+        price: data.price,
+        address: data.address,
+        city: data.city,
+        latitude: data.latitude ?? 0,
+        longitude: data.longitude ?? 0,
+        bedrooms: data.bedrooms ?? 1,
+        bathrooms: data.bathrooms ?? 1,
+        houseType: data.houseType,
+        amenities: data.amenities ? JSON.stringify(data.amenities) : '[]',
       },
       include: {
         owner: { select: ownerSelect },
@@ -121,9 +131,22 @@ export const ListingService = {
     }
 
     // Update listing
+    const updateData: Record<string, unknown> = {};
+    if (data.title !== undefined) updateData.title = data.title;
+    if (data.description !== undefined) updateData.description = data.description;
+    if (data.price !== undefined) updateData.price = data.price;
+    if (data.address !== undefined) updateData.address = data.address;
+    if (data.city !== undefined) updateData.city = data.city;
+    if (data.latitude !== undefined) updateData.latitude = data.latitude;
+    if (data.longitude !== undefined) updateData.longitude = data.longitude;
+    if (data.bedrooms !== undefined) updateData.bedrooms = data.bedrooms;
+    if (data.bathrooms !== undefined) updateData.bathrooms = data.bathrooms;
+    if (data.houseType !== undefined) updateData.houseType = data.houseType;
+    if (data.amenities !== undefined) updateData.amenities = JSON.stringify(data.amenities);
+
     const updated = await prisma.listing.update({
       where: { id },
-      data,
+      data: updateData,
       include: {
         owner: { select: ownerSelect },
         images: { orderBy: { order: 'asc' } },

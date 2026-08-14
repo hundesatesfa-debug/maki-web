@@ -31,4 +31,8 @@ export class ApiError extends Error {
   static internal(message: string, data?: any): ApiError {
     return new ApiError(500, message, data);
   }
+
+  static internalServerError(message: string, data?: any): ApiError {
+    return new ApiError(500, message, data);
+  }
 }

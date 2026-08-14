@@ -1,0 +1,7 @@
+✅ Database connected successfully
+
+🚀 Server running on http://localhost:5001
+📊 Environment: development
+🌐 Client URL: http://localhost:3000
+
+[0mGET /health [32m200[0m 23.916 ms - 54[0m

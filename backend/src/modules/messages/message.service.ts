@@ -48,6 +48,10 @@ export class MessageService {
         },
         include: {
           participants: true,
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 1,
+          },
         },
       });
     }

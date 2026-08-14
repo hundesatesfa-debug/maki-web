@@ -18,7 +18,7 @@ export class StripeGateway extends PaymentGateway {
   constructor() {
     super();
     this.stripe = new Stripe(this.secretKey || '', {
-      apiVersion: '2024-06-20', // Use compatible API version
+      apiVersion: '2023-10-16', // Use compatible API version
     });
 
     if (!this.secretKey) {

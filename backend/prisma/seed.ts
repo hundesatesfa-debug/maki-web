@@ -6,11 +6,23 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Starting seed...');
 
-  // Clean existing data
+  // Clean existing data (respect foreign keys)
+  await prisma.transactionAuditLog.deleteMany();
+  await prisma.invoice.deleteMany();
+  await prisma.subscriptionPlan.deleteMany();
+  await prisma.payoutAccount.deleteMany();
+  await prisma.dispute.deleteMany();
+  await prisma.adminLog.deleteMany();
+  await prisma.notificationPreference.deleteMany();
+  await prisma.notification.deleteMany();
+  await prisma.transaction.deleteMany();
+  await prisma.payment.deleteMany();
+  await prisma.contract.deleteMany();
+  await prisma.review.deleteMany();
+  await prisma.booking.deleteMany();
   await prisma.message.deleteMany();
   await prisma.conversationParticipant.deleteMany();
   await prisma.conversation.deleteMany();
-  await prisma.notification.deleteMany();
   await prisma.premiumListing.deleteMany();
   await prisma.favorite.deleteMany();
   await prisma.listingImage.deleteMany();
@@ -42,6 +54,10 @@ async function main() {
       lastName: 'Kebede',
       phone: '+251911111111',
       role: 'OWNER',
+      verifiedBadge: true,
+      kycStatus: 'APPROVED',
+      responseRate: 98,
+      responseTimeHours: 2.5,
     },
   });
 
@@ -53,6 +69,10 @@ async function main() {
       lastName: 'Haile',
       phone: '+251922222222',
       role: 'OWNER',
+      verifiedBadge: true,
+      kycStatus: 'APPROVED',
+      responseRate: 95,
+      responseTimeHours: 4,
     },
   });
   console.log(`✅ Owners created: ${owner1.email}, ${owner2.email}`);
@@ -97,6 +117,12 @@ async function main() {
       houseType: 'APARTMENT',
       status: 'AVAILABLE',
       isPremium: true,
+      amenities: '["Wifi","Parking","24/7 Security","Elevator","Balcony","Furnished","Kitchen","Hot Water"]',
+      imageUrls: JSON.stringify([
+        'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=500&fit=crop',
+        'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=500&fit=crop',
+      ]),
+      availableFrom: new Date(),
     },
   });
 
@@ -114,6 +140,11 @@ async function main() {
       bathrooms: 1,
       houseType: 'STUDIO',
       status: 'AVAILABLE',
+      amenities: '["Wifi","Furnished","Kitchenette","Hot Water","Laundry"]',
+      imageUrls: JSON.stringify([
+        'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=500&fit=crop',
+      ]),
+      availableFrom: new Date(),
     },
   });
 
@@ -133,6 +164,12 @@ async function main() {
       houseType: 'VILLA',
       status: 'AVAILABLE',
       isPremium: true,
+      amenities: '["Wifi","Parking","Garden","Fireplace","Gym","Security Guard","Furnished","Kitchen"]',
+      imageUrls: JSON.stringify([
+        'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=500&fit=crop',
+        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=500&fit=crop',
+      ]),
+      availableFrom: new Date(),
     },
   });
 
@@ -150,6 +187,11 @@ async function main() {
       bathrooms: 2,
       houseType: 'CONDO',
       status: 'AVAILABLE',
+      amenities: '["Wifi","Gym","Swimming Pool","Elevator","Parking","24/7 Security"]',
+      imageUrls: JSON.stringify([
+        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=500&fit=crop',
+      ]),
+      availableFrom: new Date(),
     },
   });
 
@@ -167,10 +209,38 @@ async function main() {
       bathrooms: 2,
       houseType: 'HOUSE',
       status: 'AVAILABLE',
+      amenities: '["Parking","Garden","Furnished","Kitchen","Hot Water"]',
+      imageUrls: JSON.stringify([
+        'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=500&fit=crop',
+      ]),
+      availableFrom: new Date(),
     },
   });
 
   console.log(`✅ Listings created: ${listing1.title}, ${listing2.title}, ${listing3.title}, ${listing4.title}, ${listing5.title}`);
+
+  // Create listing images (mirror of imageUrls for consistency)
+  const imageSets: Record<string, string[]> = {
+    [listing1.id]: JSON.parse(listing1.imageUrls),
+    [listing2.id]: JSON.parse(listing2.imageUrls),
+    [listing3.id]: JSON.parse(listing3.imageUrls),
+    [listing4.id]: JSON.parse(listing4.imageUrls),
+    [listing5.id]: JSON.parse(listing5.imageUrls),
+  };
+
+  for (const [listingId, urls] of Object.entries(imageSets)) {
+    for (const [index, url] of urls.entries()) {
+      await prisma.listingImage.create({
+        data: {
+          listingId,
+          url,
+          publicId: url.split('/').pop() || url,
+          order: index,
+        },
+      });
+    }
+  }
+  console.log('✅ Listing images created');
 
   // Create Premium Listing records
   await prisma.premiumListing.create({
@@ -246,28 +316,106 @@ async function main() {
   });
   console.log('✅ Conversations and messages created');
 
-  // Create Notifications
+  // Create a Booking + Payment + Review for a richer dataset
+  const booking1 = await prisma.booking.create({
+    data: {
+      propertyId: listing1.id,
+      tenantId: renter1.id,
+      landlordId: owner1.id,
+      moveInDate: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000),
+      durationMonths: 12,
+      status: 'CONFIRMED',
+      monthlyRent: 45000,
+      depositAmount: 90000,
+      message: 'Booking confirmed for the 3-bedroom apartment in Bole.',
+    },
+  });
+
+  await prisma.payment.create({
+    data: {
+      bookingId: booking1.id,
+      amount: 90000,
+      currency: 'ETB',
+      paymentGateway: 'BANK_TRANSFER',
+      paymentReference: 'TXN-2026-0001',
+      status: 'COMPLETED',
+      paymentType: 'DEPOSIT',
+      idempotencyKey: 'idem-booking1-deposit',
+    },
+  });
+
+  await prisma.contract.create({
+    data: {
+      bookingId: booking1.id,
+      status: 'PENDING',
+    },
+  });
+
+  await prisma.review.create({
+    data: {
+      bookingId: booking1.id,
+      reviewerId: renter1.id,
+      revieweeId: owner1.id,
+      reviewType: 'LANDLORD',
+      rating: 5,
+      text: 'Very responsive and professional landlord. The apartment is exactly as described!',
+      isVerified: true,
+      status: 'PUBLISHED',
+    },
+  });
+  console.log('✅ Booking, payment, contract and review created');
+
+  // Create Notifications (new Notification schema)
   await prisma.notification.createMany({
     data: [
       {
         userId: owner1.id,
         type: 'NEW_MESSAGE',
         title: 'New message from Dawit',
-        content: 'You have a new message about "Modern 3-Bedroom Apartment in Bole"',
-        link: `/chat/${conversation1.id}`,
+        message: 'You have a new message about "Modern 3-Bedroom Apartment in Bole"',
+        relatedId: conversation1.id,
+        relatedType: 'CONVERSATION',
+        channels: '["IN_APP"]',
+        status: 'PENDING',
         isRead: false,
       },
       {
         userId: renter1.id,
-        type: 'LISTING_UPDATE',
-        title: 'Listing price updated',
-        content: 'The price for "Spacious Villa in CMC" has been updated.',
-        link: `/listings/${listing3.id}`,
+        type: 'BOOKING_ACCEPTED',
+        title: 'Booking confirmed',
+        message: 'Your booking for "Modern 3-Bedroom Apartment in Bole" has been confirmed.',
+        relatedId: booking1.id,
+        relatedType: 'BOOKING',
+        channels: '["IN_APP"]',
+        status: 'PENDING',
         isRead: false,
       },
     ],
   });
-  console.log('✅ Notifications created');
+
+  // Create notification preferences for all users
+  await prisma.notificationPreference.createMany({
+    data: [admin.id, owner1.id, owner2.id, renter1.id, renter2.id].flatMap((userId) => [
+      { userId, channel: 'IN_APP', enabled: true },
+      { userId, channel: 'EMAIL', enabled: true },
+      { userId, channel: 'SMS', enabled: false },
+      { userId, channel: 'PUSH', enabled: false },
+    ]),
+  });
+  console.log('✅ Notifications and preferences created');
+
+  // Admin log
+  await prisma.adminLog.create({
+    data: {
+      adminId: admin.id,
+      action: 'SEED_DATABASE',
+      targetId: listing1.id,
+      targetType: 'LISTING',
+      changes: JSON.stringify({ note: 'Database seeded with sample data' }),
+      reason: 'Initial setup',
+    },
+  });
+  console.log('✅ Admin log created');
 
   console.log('\n🎉 Seed completed successfully!');
   console.log('\n📋 Test Accounts:');

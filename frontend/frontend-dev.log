@@ -1,0 +1,37 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.161.76:3000
+- Environments: .env.local
+✓ Ready in 720ms
+
+⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '1182696616'
+}
+⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '591136935'
+}
+[0m[7m Server [0m Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>:1:18) {
+  environmentName: 'Server',
+  digest: '591136935'
+}
+⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>:1:18) {
+  environmentName: 'Server',
+  digest: '591136935'
+}
+⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>:1:18) {
+  environmentName: 'Server',
+  digest: '591136935',
+  page: '/'
+}
+ GET / 500 in 3.6s (next.js: 3.4s, application-code: 225ms)
+ GET /register 200 in 1164ms (next.js: 638ms, application-code: 527ms)
+[?25h
