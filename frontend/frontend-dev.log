@@ -6,32 +6,31 @@
 - Local:         http://localhost:3000
 - Network:       http://169.254.161.76:3000
 - Environments: .env.local
-✓ Ready in 720ms
+✓ Ready in 735ms
 
-⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
-    at stringify (<anonymous>) {
-  digest: '1182696616'
-}
-⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
-    at stringify (<anonymous>) {
-  digest: '591136935'
-}
-[0m[7m Server [0m Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
-    at stringify (<anonymous>:1:18) {
-  environmentName: 'Server',
-  digest: '591136935'
-}
-⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
-    at stringify (<anonymous>:1:18) {
-  environmentName: 'Server',
-  digest: '591136935'
-}
-⨯ Error: Could not find the module "[project]/node_modules/next/dist/client/components/builtin/global-error.js#default" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
-    at stringify (<anonymous>:1:18) {
-  environmentName: 'Server',
-  digest: '591136935',
-  page: '/'
-}
- GET / 500 in 3.6s (next.js: 3.4s, application-code: 225ms)
- GET /register 200 in 1164ms (next.js: 638ms, application-code: 527ms)
-[?25h
+○ Compiling / ...
+ GET / 200 in 5.7s (next.js: 4.8s, application-code: 918ms)
+ GET /register 200 in 2.0s (next.js: 1800ms, application-code: 225ms)
+ GET / 200 in 388ms (next.js: 15ms, application-code: 373ms)
+ GET /register 200 in 60ms (next.js: 10ms, application-code: 50ms)
+ GET / 200 in 114ms (next.js: 8ms, application-code: 106ms)
+ GET /listings 200 in 1391ms (next.js: 1345ms, application-code: 46ms)
+[browser] Uncaught ReferenceError: handleCityChange is not defined
+    at onChange (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/_11udtrd._.js:1204:64)
+    at executeDispatch (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10329:13)
+    at runWithFiberInDEV (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at processDispatchQueue (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10355:41)
+    at <unknown> (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10633:13)
+    at batchedUpdates$1 (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:2253:44)
+    at dispatchEventForPluginEventSystem (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10431:9)
+    at dispatchEvent (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:13002:37)
+    at dispatchDiscreteEvent (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:12984:64)
+    at select (<anonymous>)
+    at ListingsContent (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/_11udtrd._.js:1202:247)
+    at ListingsPage (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/_11udtrd._.js:1542:221)
+    at ClientPageRoot (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_0wt3w02._.js:7769:50)
+✓ Compiled in 176ms
+ GET /register 200 in 89ms (next.js: 34ms, application-code: 55ms)
+ GET / 200 in 591ms (next.js: 242ms, application-code: 349ms)
+ GET /register 200 in 55ms (next.js: 15ms, application-code: 40ms)
+ GET /listings 200 in 457ms (next.js: 108ms, application-code: 349ms)

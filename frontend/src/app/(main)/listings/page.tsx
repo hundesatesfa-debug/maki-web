@@ -89,6 +89,11 @@ function ListingsContent() {
     router.push('');
   };
 
+  const handleCityChange = (city: string) => {
+    setSelectedCity(city);
+    router.push(city ? `?city=${encodeURIComponent(city)}` : '', { scroll: false });
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-8">
