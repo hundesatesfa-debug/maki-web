@@ -192,7 +192,7 @@ export const ListingService = {
     // Delete associated image files from disk
     if (listing.images && listing.images.length > 0) {
       listing.images.forEach(image => {
-        const filePath = path.join(__dirname, `../../uploads/${image.publicId}`);
+        const filePath = path.join(__dirname, `../../../uploads/${image.publicId}`);
         if (fs.existsSync(filePath)) {
           try {
             fs.unlinkSync(filePath);
@@ -232,7 +232,7 @@ export const ListingService = {
     }
 
     // Delete file from disk
-    const filePath = path.join(__dirname, `../../uploads/${image.publicId}`);
+    const filePath = path.join(__dirname, `../../../uploads/${image.publicId}`);
     if (fs.existsSync(filePath)) {
       try {
         fs.unlinkSync(filePath);

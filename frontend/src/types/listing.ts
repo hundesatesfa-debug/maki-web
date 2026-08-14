@@ -1,4 +1,4 @@
-export type HouseType = 'APARTMENT' | 'VILLA' | 'CONDO' | 'STUDIO' | 'HOUSE';
+export type HouseType = 'APARTMENT' | 'VILLA' | 'CONDO' | 'STUDIO' | 'HOUSE' | 'TOWNHOUSE';
 export type ListingStatus = 'AVAILABLE' | 'RENTED' | 'UNAVAILABLE';
 
 export interface ListingImage {

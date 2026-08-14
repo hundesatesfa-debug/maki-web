@@ -173,7 +173,7 @@ exports.ListingService = {
         // Delete associated image files from disk
         if (listing.images && listing.images.length > 0) {
             listing.images.forEach(image => {
-                const filePath = path_1.default.join(__dirname, `../../uploads/${image.publicId}`);
+                const filePath = path_1.default.join(__dirname, `../../../uploads/${image.publicId}`);
                 if (fs_1.default.existsSync(filePath)) {
                     try {
                         fs_1.default.unlinkSync(filePath);
@@ -207,7 +207,7 @@ exports.ListingService = {
             throw apiError_1.ApiError.notFound('Image not found');
         }
         // Delete file from disk
-        const filePath = path_1.default.join(__dirname, `../../uploads/${image.publicId}`);
+        const filePath = path_1.default.join(__dirname, `../../../uploads/${image.publicId}`);
         if (fs_1.default.existsSync(filePath)) {
             try {
                 fs_1.default.unlinkSync(filePath);

@@ -2,7 +2,7 @@ import { z } from 'zod';
 export declare const createBookingSchema: z.ZodObject<{
     body: z.ZodObject<{
         propertyId: z.ZodString;
-        moveInDate: z.ZodString;
+        moveInDate: z.ZodEffects<z.ZodString, string, string>;
         durationMonths: z.ZodNumber;
         monthlyRent: z.ZodNumber;
         depositAmount: z.ZodNumber;
@@ -83,7 +83,7 @@ export declare const declineBookingSchema: z.ZodObject<{
 export declare const counterOfferSchema: z.ZodObject<{
     body: z.ZodObject<{
         bookingId: z.ZodString;
-        moveInDate: z.ZodOptional<z.ZodString>;
+        moveInDate: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
         monthlyRent: z.ZodOptional<z.ZodNumber>;
         depositAmount: z.ZodOptional<z.ZodNumber>;
         durationMonths: z.ZodOptional<z.ZodNumber>;

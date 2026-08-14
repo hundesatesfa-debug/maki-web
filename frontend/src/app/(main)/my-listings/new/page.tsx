@@ -37,20 +37,47 @@ export default function NewListingPage() {
     }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const compressImage = (dataUrl: string): Promise<string> => {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX_DIM = 1600;
+        const MAX_BYTES = 4 * 1024 * 1024;
+        const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height));
+        if (scale >= 1 && dataUrl.length <= MAX_BYTES * 1.4) {
+          resolve(dataUrl);
+          return;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(dataUrl);
+          return;
+        }
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = () => resolve(dataUrl);
+      img.src = dataUrl;
+    });
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
-    if (files) {
-      Array.from(files).forEach(file => {
+    if (!files) return;
+    const compressed: string[] = [];
+    for (const file of Array.from(files)) {
+      const dataUrl = await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = (event: ProgressEvent<FileReader>) => {
-          const result = event.target?.result;
-          if (result && typeof result === 'string') {
-            setImages(prev => [...prev, result]);
-          }
-        };
+        reader.onload = event => resolve(String(event.target?.result || ''));
+        reader.onerror = () => reject(new Error('Failed to read file'));
         reader.readAsDataURL(file);
       });
+      compressed.push(await compressImage(dataUrl));
     }
+    setImages(prev => [...prev, ...compressed]);
   };
 
   const removeImage = (index: number) => {
@@ -104,8 +131,9 @@ export default function NewListingPage() {
         toast.success('Property listed successfully!');
         router.push('/my-listings');
       }
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || 'Failed to create listing');
+    } catch (error) {
+      const message = (error as { response?: { data?: { message?: string } } }).response?.data?.message;
+      toast.error(message || 'Failed to create listing');
     } finally {
       setLoading(false);
     }
@@ -301,7 +329,7 @@ export default function NewListingPage() {
                   <p className="mt-2 text-sm text-gray-600">
                     Click to upload or drag and drop
                   </p>
-                  <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                  <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB (auto-compressed)</p>
                 </div>
                 <input
                   type="file"

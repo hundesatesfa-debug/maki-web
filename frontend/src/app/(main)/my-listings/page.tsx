@@ -7,6 +7,7 @@ import { Plus, Trash2, Eye, Edit2 } from 'lucide-react';
 import { api } from '@/lib/axios';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { getListingImage } from '@/lib/listingImages';
 
 interface Listing {
   id: string;

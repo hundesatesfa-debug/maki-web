@@ -1,9 +1,11 @@
 import { z } from 'zod';
 
+const isValidDate = (value: string) => !Number.isNaN(Date.parse(value));
+
 export const createBookingSchema = z.object({
   body: z.object({
     propertyId: z.string().uuid(),
-    moveInDate: z.string().datetime(),
+    moveInDate: z.string().refine(isValidDate, 'Invalid date'),
     durationMonths: z.number().int().positive().min(1),
     monthlyRent: z.number().positive(),
     depositAmount: z.number().positive(),
@@ -27,7 +29,7 @@ export const declineBookingSchema = z.object({
 export const counterOfferSchema = z.object({
   body: z.object({
     bookingId: z.string().uuid(),
-    moveInDate: z.string().datetime().optional(),
+    moveInDate: z.string().refine(isValidDate, 'Invalid date').optional(),
     monthlyRent: z.number().positive().optional(),
     depositAmount: z.number().positive().optional(),
     durationMonths: z.number().int().positive().optional(),

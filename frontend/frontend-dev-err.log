@@ -1,0 +1,2 @@
+[browser] Image with src "http://localhost:5001/uploads/images-1786717029605-454679347.jpg" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width (file://C:/Users/odaa/Desktop/MAKI WEB/frontend/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)

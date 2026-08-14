@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBookingsSchema = exports.cancelBookingSchema = exports.counterOfferSchema = exports.declineBookingSchema = exports.acceptBookingSchema = exports.createBookingSchema = void 0;
 const zod_1 = require("zod");
+const isValidDate = (value) => !Number.isNaN(Date.parse(value));
 exports.createBookingSchema = zod_1.z.object({
     body: zod_1.z.object({
         propertyId: zod_1.z.string().uuid(),
-        moveInDate: zod_1.z.string().datetime(),
+        moveInDate: zod_1.z.string().refine(isValidDate, 'Invalid date'),
         durationMonths: zod_1.z.number().int().positive().min(1),
         monthlyRent: zod_1.z.number().positive(),
         depositAmount: zod_1.z.number().positive(),
@@ -26,7 +27,7 @@ exports.declineBookingSchema = zod_1.z.object({
 exports.counterOfferSchema = zod_1.z.object({
     body: zod_1.z.object({
         bookingId: zod_1.z.string().uuid(),
-        moveInDate: zod_1.z.string().datetime().optional(),
+        moveInDate: zod_1.z.string().refine(isValidDate, 'Invalid date').optional(),
         monthlyRent: zod_1.z.number().positive().optional(),
         depositAmount: zod_1.z.number().positive().optional(),
         durationMonths: zod_1.z.number().int().positive().optional(),
