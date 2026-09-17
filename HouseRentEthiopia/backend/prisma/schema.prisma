@@ -27,11 +27,23 @@ enum HouseStatus {
   UNAVAILABLE
 }
 
+enum PaymentMethod {
+  CHAPA
+  CBE_BIRR
+  TELEBIRR
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
 model User {
   id              String         @id @default(uuid())
   name            String
   email           String         @unique
-  password        String
+  password        String?       // unused with Supabase Auth; retained for compatibility
   phoneNumber     String?
   profilePicture  String?
   role            Role           @default(RENTER)
@@ -42,7 +54,8 @@ model User {
   favorites       Favorite[]
   messages        Message[]
   notifications   Notification[]
-  
+  renterPayments  Payment[]      @relation("PaymentRenter")
+
   renterConversations Conversation[] @relation("ConversationRenter")
   ownerConversations  Conversation[] @relation("ConversationOwner")
 
@@ -74,11 +87,13 @@ model House {
   
   images          Image[]
   favorites       Favorite[]
+  payments        Payment[]
 
   @@index([city])
   @@index([price])
   @@index([houseType])
   @@index([isPremium, premiumEndsAt])
+  @@unique([latitude, longitude])
 }
 
 model Image {
@@ -143,4 +158,27 @@ model Notification {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model Payment {
+  id            String         @id @default(uuid())
+  houseId       String
+  renterId      String
+  amount        Float
+  currency      String         @default("ETB")
+  method        PaymentMethod  @default(CHAPA)
+  status        PaymentStatus  @default(PENDING)
+  reference     String?        // Chapa checkout / reference id, or local payment ref
+  txRef         String?        // Chapa transaction reference
+  metadata      String?        // JSON string of extra Chapa callback data
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  paidAt        DateTime?
+
+  house         House          @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  renter        User           @relation("PaymentRenter", fields: [renterId], references: [id], onDelete: Cascade)
+
+  @@index([houseId])
+  @@index([renterId])
+  @@index([status])
 }
